@@ -349,11 +349,20 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 			   }
 			   else if(txb2 == 2)
 			   {
+				   listBox1->Items->Remove(x.p0.top());
+				   temp = x.p0.top();
+				   x.p2.push(temp);
+				   x.p0.pop();
+				   listBox3->Items->Add(x.p2.top());
 
 			   }
 			   else if(txb2 == 3)
 			   {
-
+				   listBox1->Items->Remove(x.p0.top());
+				   temp = x.p0.top();
+				   x.p3.push(temp);
+				   x.p0.pop();
+				   listBox4->Items->Add(x.p3.top());
 			   }
 			   else
 			   {
@@ -365,15 +374,27 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		   {
 			   if (txb2 == 0)
 			   {
-				   
+				   listBox2->Items->Remove(x.p1.top());
+				   temp = x.p1.top();
+				   x.p2.push(temp);
+				   x.p1.pop();
+				   listBox1->Items->Add(x.p2.top());
 			   }
 			   else if (txb2 == 2)
 			   {
-
+				   listBox2->Items->Remove(x.p1.top());
+				   temp = x.p1.top();
+				   x.p2.push(temp);
+				   x.p1.pop();
+				   listBox1->Items->Add(x.p2.top());
 			   }
 			   else if (txb2 == 3)
 			   {
-
+				   listBox2->Items->Remove(x.p1.top());
+				   temp = x.p1.top();
+				   x.p3.push(temp);
+				   x.p1.pop();
+				   listBox1->Items->Add(x.p3.top());
 			   }
 			   else
 			   {
@@ -385,15 +406,27 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		   {
 			   if (txb2 == 0)
 			   {
-
+				   listBox3->Items->Remove(x.p2.top());
+				   temp = x.p2.top();
+				   x.p0.push(temp);
+				   x.p2.pop();
+				   listBox1->Items->Add(x.p0.top());
 			   }
 			   else if (txb2 == 1)
 			   {
-
+				   listBox3->Items->Remove(x.p2.top());
+				   temp = x.p2.top();
+				   x.p1.push(temp);
+				   x.p2.pop();
+				   listBox2->Items->Add(x.p1.top());
 			   }
 			   else if (txb2 == 3)
 			   {
-
+				   listBox3->Items->Remove(x.p2.top());
+				   temp = x.p2.top();
+				   x.p3.push(temp);
+				   x.p2.pop();
+				   listBox2->Items->Add(x.p3.top());
 			   }
 			   else
 			   {
@@ -405,14 +438,29 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		   {
 			   if (txb2 == 0)
 			   {
+				   listBox4->Items->Remove(x.p3.top());
+				   temp = x.p3.top();
+				   x.p0.push(temp);
+				   x.p3.pop();
+				   listBox1->Items->Add(x.p0.top());
 
 			   }
 			   else if (txb2 == 1)
 			   {
+				   listBox4->Items->Remove(x.p3.top());
+				   temp = x.p3.top();
+				   x.p1.push(temp);
+				   x.p3.pop();
+				   listBox2->Items->Add(x.p1.top());
 
 			   }
 			   else if (txb2 == 2)
 			   {
+				   listBox4->Items->Remove(x.p3.top());
+				   temp = x.p3.top();
+				   x.p2.push(temp);
+				   x.p3.pop();
+				   listBox3->Items->Add(x.p2.top());
 
 			   }
 			   else
