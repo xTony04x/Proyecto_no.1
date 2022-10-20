@@ -1,6 +1,7 @@
 #pragma once
 #include<stdlib.h>
 #include<stack>
+#include"MyForm1.h"
 namespace ProyectoPA {
 
 	using namespace System;
@@ -40,6 +41,7 @@ namespace ProyectoPA {
 	protected:
 
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+	private: System::Windows::Forms::Button^ button1;
 
 
 
@@ -59,17 +61,29 @@ namespace ProyectoPA {
 		void InitializeComponent(void)
 		{
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// openFileDialog1
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(207, 113);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(57, 36);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"button1";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click_1);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(407, 333);
+			this->Controls->Add(this->button1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
@@ -85,6 +99,9 @@ namespace ProyectoPA {
 		
 	}
 	public: void pilas() {
+
+	}
+	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
 
 	}
 	};

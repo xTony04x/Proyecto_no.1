@@ -3,11 +3,11 @@
 #include<stack>
 #include<string>
 using namespace std;
-using namespace IO;
 using namespace System;
 
 class program
 {
+public:
 	stack<String^>p0;
 	stack<String^>p1;
 	stack<String^>p2;
@@ -18,5 +18,6 @@ class program
 	string pila2[4];
 	string pila3[4];
 
+	int txb1 = 0, txb2 = 0;
 };
 
