@@ -1,6 +1,4 @@
 #pragma once
-#include<stdlib.h>
-#include<stack>
 #include"MyForm1.h"
 namespace ProyectoPA {
 
@@ -70,7 +68,7 @@ namespace ProyectoPA {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(207, 113);
+			this->button1->Location = System::Drawing::Point(170, 213);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(57, 36);
 			this->button1->TabIndex = 0;
@@ -102,7 +100,8 @@ namespace ProyectoPA {
 
 	}
 	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-
+		MyForm1^ xx = gcnew MyForm1();
+		xx->ShowDialog();
 	}
 	};
 }

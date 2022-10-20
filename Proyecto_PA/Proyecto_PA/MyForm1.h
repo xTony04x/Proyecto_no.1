@@ -1,8 +1,7 @@
 #pragma once
-#include<stdlib.h>
 #include<stack>
 #include<string>
-#include"program.h"
+#include"declar.h"
 namespace ProyectoPA {
 
 	using namespace System;
@@ -11,16 +10,27 @@ namespace ProyectoPA {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace IO;
+	using namespace System::IO;
 
 	/// <summary>
 	/// Resumen de MyForm1
 	/// </summary>
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
-		
+
+	public: int txb1 = 0, txb2 = 0;
+	private: System::Windows::Forms::ListBox^ listBox1;
+	public:
+	private: System::Windows::Forms::ListBox^ listBox2;
+	private: System::Windows::Forms::ListBox^ listBox3;
+	private: System::Windows::Forms::ListBox^ listBox4;
+	private: System::Windows::Forms::ListBox^ listBox5;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Button^ button3;
+	public:
 	public:
 		
+
 		MyForm1(void)
 		{
 			//ingresar todas las variables
@@ -82,6 +92,13 @@ namespace ProyectoPA {
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
+			this->listBox3 = (gcnew System::Windows::Forms::ListBox());
+			this->listBox4 = (gcnew System::Windows::Forms::ListBox());
+			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// button2
@@ -150,6 +167,7 @@ namespace ProyectoPA {
 			// openFileDialog1
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
+			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MyForm1::openFileDialog1_FileOk);
 			// 
 			// label4
 			// 
@@ -187,11 +205,77 @@ namespace ProyectoPA {
 			this->label7->TabIndex = 16;
 			this->label7->Text = L"P3";
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(273, 450);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(79, 30);
+			this->button3->TabIndex = 17;
+			this->button3->Text = L"button3";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm1::button3_Click);
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(146, 114);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(72, 160);
+			this->listBox1->TabIndex = 18;
+			// 
+			// listBox2
+			// 
+			this->listBox2->FormattingEnabled = true;
+			this->listBox2->Location = System::Drawing::Point(251, 114);
+			this->listBox2->Name = L"listBox2";
+			this->listBox2->Size = System::Drawing::Size(72, 160);
+			this->listBox2->TabIndex = 19;
+			// 
+			// listBox3
+			// 
+			this->listBox3->FormattingEnabled = true;
+			this->listBox3->Location = System::Drawing::Point(343, 114);
+			this->listBox3->Name = L"listBox3";
+			this->listBox3->Size = System::Drawing::Size(72, 160);
+			this->listBox3->TabIndex = 20;
+			// 
+			// listBox4
+			// 
+			this->listBox4->FormattingEnabled = true;
+			this->listBox4->Location = System::Drawing::Point(437, 114);
+			this->listBox4->Name = L"listBox4";
+			this->listBox4->Size = System::Drawing::Size(72, 160);
+			this->listBox4->TabIndex = 21;
+			// 
+			// listBox5
+			// 
+			this->listBox5->FormattingEnabled = true;
+			this->listBox5->Location = System::Drawing::Point(437, 362);
+			this->listBox5->Name = L"listBox5";
+			this->listBox5->Size = System::Drawing::Size(72, 160);
+			this->listBox5->TabIndex = 22;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(435, 327);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(82, 13);
+			this->label8->TabIndex = 23;
+			this->label8->Text = L"mapa ingresado";
+			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(653, 534);
+			this->Controls->Add(this->label8);
+			this->Controls->Add(this->listBox5);
+			this->Controls->Add(this->listBox4);
+			this->Controls->Add(this->listBox3);
+			this->Controls->Add(this->listBox2);
+			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label7);
 			this->Controls->Add(this->label6);
 			this->Controls->Add(this->label5);
@@ -210,7 +294,10 @@ namespace ProyectoPA {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
+	{//abrir el archivo
+		openFileDialog1->ShowDialog();
+
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
@@ -219,25 +306,52 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	program x;
-	x.txb1 = Convert::ToInt32(textBox1->Text);
-	x.txb2 = Convert::ToInt32(textBox2->Text);
+	//SWAP
+	
+	txb1 = Convert::ToInt32(textBox1->Text);
+	txb2 = Convert::ToInt32(textBox2->Text);
 	cambios();
 }
+
 	   // para realizar los movimientos
 	   public: void cambios() {
-		   program x;
-		   if (x.txb1==0) 
+		   char temp;
+		   declar x;
+		   x.p0.push('r');
+		   x.p0.push('b');
+		   x.p0.push('a');
+
+		   //pila no.1
+		   x.p1.push('a');
+		   x.p1.push('r');
+		   x.p1.push('v');
+
+		   //PILA NO.2
+		   x.p2.push('a');
+		   x.p2.push('r');
+		   x.p2.push('v');
+		   x.p2.push('b');
+
+		   //PILA NO.3
+		   x.p3.push('b');
+		   x.p3.push('a');
+		   x.p3.push('v');
+		   
+		   if (txb1==0) 
 		   {
-			   if (x.txb2 == 1) 
+			   if (txb2 == 1)
+			   {
+				   listBox1->Items->Remove(x.p0.top());
+				   temp = x.p0.top();
+				   x.p1.push(temp);
+				   x.p0.pop();
+				   listBox2->Items->Add(x.p1.top());
+			   }
+			   else if(txb2 == 2)
 			   {
 
 			   }
-			   else if(x.txb2 == 2)
-			   {
-
-			   }
-			   else if(x.txb2 == 3)
+			   else if(txb2 == 3)
 			   {
 
 			   }
@@ -247,17 +361,17 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 			   }
 
 		   }
-		   else if (x.txb1 == 1)
+		   else if (txb1 == 1)
 		   {
-			   if (x.txb2 == 0)
+			   if (txb2 == 0)
+			   {
+				   
+			   }
+			   else if (txb2 == 2)
 			   {
 
 			   }
-			   else if (x.txb2 == 2)
-			   {
-
-			   }
-			   else if (x.txb2 == 3)
+			   else if (txb2 == 3)
 			   {
 
 			   }
@@ -267,17 +381,17 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 			   }
 
 		   }
-		   else if (x.txb1 == 2)
+		   else if (txb1 == 2)
 		   {
-			   if (x.txb2 == 0)
+			   if (txb2 == 0)
 			   {
 
 			   }
-			   else if (x.txb2 == 1)
+			   else if (txb2 == 1)
 			   {
 
 			   }
-			   else if (x.txb2 == 3)
+			   else if (txb2 == 3)
 			   {
 
 			   }
@@ -287,17 +401,17 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 			   }
 
 		   }
-		   else if (x.txb1 == 3)
+		   else if (txb1 == 3)
 		   {
-			   if (x.txb2 == 0)
+			   if (txb2 == 0)
 			   {
 
 			   }
-			   else if (x.txb2 == 1)
+			   else if (txb2 == 1)
 			   {
 
 			   }
-			   else if (x.txb2 == 2)
+			   else if (txb2 == 2)
 			   {
 
 			   }
@@ -308,5 +422,61 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 
 		   }
 	   }
+private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 
+{
+	String^ FilePath = openFileDialog1->FileName;
+	StreamReader^ Sr = gcnew StreamReader(FilePath);
+	String^ linea= ",";
+	linea = Sr->ReadLine();
+	listBox5->Text = linea;
+	Sr->Close();
+
+
+}
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	declar x;
+	
+	//pila no.0
+	x.p0.push('r');
+	x.p0.push('b');
+	x.p0.push('a');
+
+	//pila no.1
+	x.p1.push('a');
+	x.p1.push('r');
+	x.p1.push('v');
+
+	//PILA NO.2
+	x.p2.push('a');
+	x.p2.push('r');
+	x.p2.push('v');
+	x.p2.push('b');
+
+	//PILA NO.3
+	x.p3.push('b');
+	x.p3.push('a');
+	x.p3.push('v');
+
+	while (!x.p0.empty())
+	{
+		listBox1->Items->Add(x.p0.top());
+		x.p0.pop();
+	}
+	while (!x.p1.empty())
+	{
+		listBox2->Items->Add(x.p1.top());
+		x.p1.pop();
+	}
+	while (!x.p2.empty())
+	{
+		listBox3->Items->Add(x.p2.top());
+		x.p2.pop();
+	}
+	while (!x.p3.empty())
+	{
+		listBox4->Items->Add(x.p3.top());
+		x.p3.pop();
+	}
+}
 };
 }
