@@ -13,5 +13,7 @@ class declar
 		std::string pila1[4];
 		std::string pila2[4];
 	    std::string pila3[4];
+
+		    
 };
 
