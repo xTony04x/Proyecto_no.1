@@ -9,10 +9,10 @@ class declar
 		std::stack <wchar_t> p2;
 	    std::stack <wchar_t> p3;
 
-		std::string pila0[4];
-		std::string pila1[4];
-		std::string pila2[4];
-	    std::string pila3[4];
+		std::string pila0[3];
+		std::string pila1[3];
+		std::string pila2[3];
+	    std::string pila3[3];
 
 		    
 };

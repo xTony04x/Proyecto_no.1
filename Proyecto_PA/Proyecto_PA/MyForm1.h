@@ -2,6 +2,10 @@
 #include<stack>
 #include<string>
 #include"declar.h"
+#include <msclr\marshal_cppstd.h>
+
+
+
 namespace ProyectoPA {
 
 	using namespace System;
@@ -11,6 +15,7 @@ namespace ProyectoPA {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+	
 
 	/// <summary>
 	/// Resumen de MyForm1
@@ -65,7 +70,7 @@ namespace ProyectoPA {
 	private: System::Windows::Forms::Label^ label5;
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::Label^ label7;
-	private: System::Windows::Forms::ColorDialog^ colorDialog1;
+
 
 
 	private:
@@ -93,7 +98,6 @@ namespace ProyectoPA {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->label7 = (gcnew System::Windows::Forms::Label());
-			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
@@ -334,7 +338,6 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 		   
 		   if (txb1==0) 
 		   {    
-
 			   
 			   if (txb2 == 1)
 			   {
@@ -432,7 +435,7 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 				   else
 				   {
 					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }//sexooo
+				   }
 			   }
 			   else
 			   {
@@ -546,48 +549,33 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 
 {
 	declar x;
-	System::String^ Text_n;
-	openFileDialog1->Title = "Open Text files";
-	openFileDialog1->ShowDialog();
-	Text_n = openFileDialog1->FileName;
-	String^ fileName = Text_n;
-
-	MessageBox::Show("trying to open file {0}...", fileName);
-	StreamReader^ din = File::OpenText(fileName);
-	String^ str;
-	int count = 0;
-	while ((str = din->ReadLine()) != nullptr)
+	String^ FilePath = openFileDialog1->FileName;
+	StreamReader^ sr = gcnew  StreamReader (FilePath);
+	if (FilePath->Contains(""))
 	{
-		count++;
-		listBox5->Items->Add(str);
-	}
+		String^ stack = "";
+		String^ Linea = "";
+		int Contador = 0;
+		while ((Linea = sr->ReadLine()) != nullptr)
+		{
+			if (Linea[Linea->Length -1] == ',')
+			{
+				Linea = Linea->Remove(Linea->Length - 2, 1);
+			}
+			 array<String^>^pila = Linea->Split(',');
+			 listBox5->Items->Add(Linea);
+			 msclr::interop::marshal_as<std::string>(pila);
+			 x.pila0[contador] = pila[0];
 
+			 contador++;
+
+		}
+	
+	}
 
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	declar x;
-	//pila no.0
-	x.p0.push('r');
-	x.p0.push('b');
-	x.p0.push('a');
-
-	//pila no.1
-	x.p1.push('a');
-	x.p1.push('r');
-	x.p1.push('v');
-
-	//PILA NO.2
-	x.p2.push('a');
-	x.p2.push('r');
-	x.p2.push('v');
-	x.p2.push('b');
-
-	//PILA NO.3
-	x.p3.push('b');
-	x.p3.push('a');
-	x.p3.push('v');
-
-	int cont = 0;
 
 	while (!x.p0.empty())
 	{
@@ -613,28 +601,7 @@ private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
 	
-	declar x;
-	//pila no.0
-	x.p0.push('r');
-	x.p0.push('b');
-	x.p0.push('a');
-
-	//pila no.1
-	x.p1.push('a');
-	x.p1.push('r');
-	x.p1.push('v');
-
-	//PILA NO.2
-	x.p2.push('a');
-	x.p2.push('r');
-	x.p2.push('v');
-	x.p2.push('b');
-
-	//PILA NO.3
-	x.p3.push('b');
-	x.p3.push('a');
-	x.p3.push('v');
-	MessageBox::Show("pilas llenas");
+	
 }
 	  
 };
