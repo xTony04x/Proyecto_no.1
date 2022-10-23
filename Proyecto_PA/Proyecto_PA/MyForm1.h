@@ -1,8 +1,12 @@
 #pragma once
+#pragma unmanaged
+#pragma managed
 #include<stack>
 #include<string>
-#include"declar.h"
 #include <msclr\marshal_cppstd.h>
+#include"colores.h"
+#include"variables.h"
+
 
 
 
@@ -20,9 +24,10 @@ namespace ProyectoPA {
 	/// <summary>
 	/// Resumen de MyForm1
 	/// </summary>
+    
+
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
-
 	public: int txb1 = 0, txb2 = 0;
 	public: int contador = 0;
 	private: System::Windows::Forms::ListBox^ listBox1;
@@ -30,9 +35,10 @@ namespace ProyectoPA {
 	private: System::Windows::Forms::ListBox^ listBox2;
 	private: System::Windows::Forms::ListBox^ listBox3;
 	private: System::Windows::Forms::ListBox^ listBox4;
-	private: System::Windows::Forms::ListBox^ listBox5;
+
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::Button^ button4;
+	private: System::Windows::Forms::TextBox^ textBox3;
+
 	private: System::Windows::Forms::Button^ button3;
 	public:
 	public:
@@ -103,9 +109,8 @@ namespace ProyectoPA {
 			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
 			this->listBox3 = (gcnew System::Windows::Forms::ListBox());
 			this->listBox4 = (gcnew System::Windows::Forms::ListBox());
-			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// button2
@@ -254,14 +259,6 @@ namespace ProyectoPA {
 			this->listBox4->Size = System::Drawing::Size(72, 160);
 			this->listBox4->TabIndex = 21;
 			// 
-			// listBox5
-			// 
-			this->listBox5->FormattingEnabled = true;
-			this->listBox5->Location = System::Drawing::Point(437, 362);
-			this->listBox5->Name = L"listBox5";
-			this->listBox5->Size = System::Drawing::Size(72, 160);
-			this->listBox5->TabIndex = 22;
-			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
@@ -271,24 +268,21 @@ namespace ProyectoPA {
 			this->label8->TabIndex = 23;
 			this->label8->Text = L"mapa ingresado";
 			// 
-			// button4
+			// textBox3
 			// 
-			this->button4->Location = System::Drawing::Point(307, 454);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(79, 25);
-			this->button4->TabIndex = 24;
-			this->button4->Text = L"Dec var";
-			this->button4->UseVisualStyleBackColor = true;
-			this->button4->Click += gcnew System::EventHandler(this, &MyForm1::button4_Click);
+			this->textBox3->Location = System::Drawing::Point(436, 363);
+			this->textBox3->Multiline = true;
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(81, 159);
+			this->textBox3->TabIndex = 24;
 			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(653, 534);
-			this->Controls->Add(this->button4);
+			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->label8);
-			this->Controls->Add(this->listBox5);
 			this->Controls->Add(this->listBox4);
 			this->Controls->Add(this->listBox3);
 			this->Controls->Add(this->listBox2);
@@ -314,7 +308,13 @@ namespace ProyectoPA {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
 	{//abrir el archivo
-		openFileDialog1->ShowDialog();
+		//Lectura del Archivo
+		variables x;
+		x.LeerArchivo("mapa.txt");
+		std::string Mostrar = "";
+		Mostrar = x.printcolors();
+
+		textBox1->Text = gcnew String(Mostrar.c_str());
 
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -328,281 +328,27 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	
 	txb1 = Convert::ToInt32(textBox1->Text);
 	txb2 = Convert::ToInt32(textBox2->Text);
-	cambios();
+	
 }
 
 	   // para realizar los movimientos
-	   public: void cambios() {
-		   char temp;
-		   declar x;
-		   
-		   if (txb1==0) 
-		   {    
-			   
-			   if (txb2 == 1)
-			   {
-				   if (x.p1.size() < 4)
-				   {
-					   listBox1->Items->Remove(x.p0.top());
-					   temp = x.p0.top();
-					   x.p1.push(temp);
-					   x.p0.pop();
-					   listBox2->Items->Add(x.p1.top());
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-			   
-			   else if(txb2 == 2)
-			   {
-				   if (x.p1.size() < 4)
-				   {
-					   listBox1->Items->Remove(x.p0.top());
-					   temp = x.p0.top();
-					   x.p2.push(temp);
-					   x.p0.pop();
-					   listBox3->Items->Add(x.p2.top());
-				   }
-				   else { 
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA"); 
-				   }
-			   }
-			   
-			   else if(txb2 == 3)
-			   {
-				   if (x.p3.size() < 4)
-				   {
-					   listBox1->Items->Remove(x.p0.top());
-					   temp = x.p0.top();
-					   x.p3.push(temp);
-					   x.p0.pop();
-					   listBox4->Items->Add(x.p3.top());
-				   }
-			    else
-			    {
-				   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-			    }
-				   
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-			   
-		   }
-		   else if (txb1 == 1)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() < 4) {
-					   listBox2->Items->Remove(x.p1.top());
-					   temp = x.p1.top();
-					   x.p0.push(temp);
-					   x.p1.pop();
-					   listBox1->Items->Add(x.p0.top());
-				   }
-			      else
-				  {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				  }
-			   }
-			   else if (txb2 == 2)
-			   {
-				   if (x.p2.size()<4) {
-					   listBox2->Items->Remove(x.p1.top());
-					   temp = x.p1.top();
-					   x.p2.push(temp);
-					   x.p1.pop();
-					   listBox1->Items->Add(x.p2.top());
-				   }
-			    else
-			    {
-				   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-			    }
-			   }
-			   else if (txb2 == 3)
-			   {
-				   if (x.p3.size() < 4)
-				   {
-				   listBox2->Items->Remove(x.p1.top());
-				   temp = x.p1.top();
-				   x.p3.push(temp);
-				   x.p1.pop();
-				   listBox1->Items->Add(x.p3.top());
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   else if (txb1 == 2)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() < 4) {
-					   listBox3->Items->Remove(x.p2.top());
-					   temp = x.p2.top();
-					   x.p0.push(temp);
-					   x.p2.pop();
-					   listBox1->Items->Add(x.p0.top());
-				   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-			   }
-			   else if (txb2 == 1)
-			   {
-				   if (x.p1.size() < 4) {
-					   listBox3->Items->Remove(x.p2.top());
-					   temp = x.p2.top();
-					   x.p1.push(temp);
-					   x.p2.pop();
-					   listBox2->Items->Add(x.p1.top());
-				   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-			   }
-			   else if (txb2 == 3)
-			   {
-				   if (x.p3.size() < 4) {
-					   listBox3->Items->Remove(x.p2.top());
-					   temp = x.p2.top();
-					   x.p3.push(temp);
-					   x.p2.pop();
-					   listBox2->Items->Add(x.p3.top());
-				   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   else if (txb1 == 3)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() < 4) {
-					   listBox4->Items->Remove(x.p3.top());
-					   temp = x.p3.top();
-					   x.p0.push(temp);
-					   x.p3.pop();
-					   listBox1->Items->Add(x.p0.top());
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 1)
-			   {
-				   if (x.p1.size() < 4) 
-				   {
-					   listBox4->Items->Remove(x.p3.top());
-					   temp = x.p3.top();
-					   x.p1.push(temp);
-					   x.p3.pop();
-					   listBox2->Items->Add(x.p1.top());
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 2)
-			   {
-				   if (x.p2.size() < 4) {
-					   listBox4->Items->Remove(x.p3.top());
-					   temp = x.p3.top();
-					   x.p2.push(temp);
-					   x.p3.pop();
-					   listBox3->Items->Add(x.p2.top());
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   
-	   }
+	   
 private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 
 {
-	declar x;
-	String^ FilePath = openFileDialog1->FileName;
-	StreamReader^ sr = gcnew  StreamReader (FilePath);
-	if (FilePath->Contains(""))
-	{
-		String^ stack = "";
-		String^ Linea = "";
-		int Contador = 0;
-		while ((Linea = sr->ReadLine()) != nullptr)
-		{
-			if (Linea[Linea->Length -1] == ',')
-			{
-				Linea = Linea->Remove(Linea->Length - 2, 1);
-			}
-			 array<String^>^pila = Linea->Split(',');
-			 listBox5->Items->Add(Linea);
-			 msclr::interop::marshal_as<std::string>(pila);
-			 x.pila0[contador] = pila[0];
-
-			 contador++;
-
-		}
-	
-	}
 
 }
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	declar x;
-
-	while (!x.p0.empty())
-	{
-		listBox1->Items->Add(x.p0.top());
-		x.p0.pop();
-	}
-	while (!x.p1.empty())
-	{
-		listBox2->Items->Add(x.p1.top());
-		x.p1.pop();
-	}
-	while (!x.p2.empty())
-	{
-		listBox3->Items->Add(x.p2.top());
-		x.p2.pop();
-	}
-	while (!x.p3.empty())
-	{
-		listBox4->Items->Add(x.p3.top());
-		x.p3.pop();
-	}
+	
+	
+	
 	
 }
 private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-	
+
 }
 	  
+private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+
+}
 };
 }
