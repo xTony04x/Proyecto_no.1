@@ -9,7 +9,5 @@ public:
 	string pila1;
 	string pila2;
 	string pila3;
-
-	
 };
 

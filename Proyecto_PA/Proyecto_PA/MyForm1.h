@@ -236,7 +236,7 @@ namespace ProyectoPA {
 			this->listBox1->FormattingEnabled = true;
 			this->listBox1->Location = System::Drawing::Point(146, 114);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(72, 160);
+			this->listBox1->Size = System::Drawing::Size(72, 82);
 			this->listBox1->TabIndex = 18;
 			// 
 			// listBox2
@@ -244,7 +244,7 @@ namespace ProyectoPA {
 			this->listBox2->FormattingEnabled = true;
 			this->listBox2->Location = System::Drawing::Point(251, 114);
 			this->listBox2->Name = L"listBox2";
-			this->listBox2->Size = System::Drawing::Size(72, 160);
+			this->listBox2->Size = System::Drawing::Size(72, 82);
 			this->listBox2->TabIndex = 19;
 			// 
 			// listBox3
@@ -252,7 +252,7 @@ namespace ProyectoPA {
 			this->listBox3->FormattingEnabled = true;
 			this->listBox3->Location = System::Drawing::Point(343, 114);
 			this->listBox3->Name = L"listBox3";
-			this->listBox3->Size = System::Drawing::Size(72, 160);
+			this->listBox3->Size = System::Drawing::Size(72, 82);
 			this->listBox3->TabIndex = 20;
 			// 
 			// listBox4
@@ -260,7 +260,7 @@ namespace ProyectoPA {
 			this->listBox4->FormattingEnabled = true;
 			this->listBox4->Location = System::Drawing::Point(437, 114);
 			this->listBox4->Name = L"listBox4";
-			this->listBox4->Size = System::Drawing::Size(72, 160);
+			this->listBox4->Size = System::Drawing::Size(72, 82);
 			this->listBox4->TabIndex = 21;
 			// 
 			// label8
@@ -317,33 +317,32 @@ namespace ProyectoPA {
 		string nombre = "mapa.csv";
 		x.LeerArchivo(nombre);
 		string Mostrar = "";
-		Mostrar = x.printcolors();
 		listBox5->Items->Add(gcnew String(Mostrar.c_str()));
 		
-		
-			while (!x.p0.empty())
-			{
-				listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
-				x.p0.pop();
-			}
-			while (!x.p1.empty())
-			{
-				listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
-				x.p1.pop();
-			}
-			while (!x.p2.empty())
-			{
-				listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
-				x.p2.pop();
-			}
-			while (!x.p3.empty())
-			{
-				listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
-				x.p3.pop();
-			}
-		
-		
+		while (!x.p0.empty())
+		{
+			listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
+			x.p0.pop();
+		}
+		while (!x.p1.empty())
+		{
+			listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
+			x.p1.pop();
+		}
+		while (!x.p2.empty())
+		{
+			listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
+			x.p2.pop();
+		}
+		while (!x.p3.empty())
+		{
+			listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
+			x.p3.pop();
+		}
 	}
+		   
+		
+		   
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 	}
@@ -355,9 +354,224 @@ private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e
 	
 	txb1 = Convert::ToInt32(textBox1->Text);
 	txb2 = Convert::ToInt32(textBox2->Text);
-	
+	void cambios();
 }
+	   public: void cambios() {
+		   variables x;
+		   string temp;
+		   
+		   if (txb1 == 0)
+		   {
 
+			   if (txb2 == 1)
+			   {
+				   if (x.p1.size() < 4)
+				   {
+					
+					   temp = x.p0.top();
+					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
+					   x.p1.push(temp);
+					   x.p0.pop();
+					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+			   }
+
+			   else if (txb2 == 2)
+			   {
+				   if (x.p2.size() <= 4)
+				   {
+					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
+					   temp = x.p0.top();
+					   x.p2.push(temp);
+					   x.p0.pop();
+					   listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
+				   }
+				   else {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+			   }
+
+			   else if (txb2 == 3)
+			   {
+				   if (x.p3.size() <= 4)
+				   {
+					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
+					   temp = x.p0.top();
+					   x.p3.push(temp);
+					   x.p0.pop();
+					   listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+
+			   }
+			   else
+			   {
+				   MessageBox::Show("Ingrese un numero del 0 al 3");
+			   }
+
+		   }
+		   else if (txb1 == 1)
+		   {
+			   if (txb2 == 0)
+			   {
+				   if (x.p0.size() <= 4) {
+					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
+					   temp = x.p1.top();
+					   x.p0.push(temp);
+					   x.p1.pop();
+					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+			   }
+			   else if (txb2 == 2)
+			   {
+				   if (x.p2.size() <= 4) {
+					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
+					   temp = x.p1.top();
+					   x.p2.push(temp);
+					   x.p1.pop();
+					   listBox1->Items->Add(gcnew String(x.p2.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+			   }
+			   else if (txb2 == 3)
+			   {
+				   if (x.p3.size() <= 4)
+				   {
+					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
+					   temp = x.p1.top();
+					   x.p3.push(temp);
+					   x.p1.pop();
+					   listBox1->Items->Add(gcnew String(x.p3.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
+				   }
+			   }
+			   else
+			   {
+				   MessageBox::Show("Ingrese un numero del 0 al 3");
+			   }
+
+		   }
+		   else if (txb1 == 2)
+		   {
+			   if (txb2 == 0)
+			   {
+				   if (x.p0.size() <= 4) {
+					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
+					   temp = x.p2.top();
+					   x.p0.push(temp);
+					   x.p2.pop();
+					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else if (txb2 == 1)
+			   {
+				   if (x.p1.size() <= 4) {
+					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
+					   temp = x.p2.top();
+					   x.p1.push(temp);
+					   x.p2.pop();
+					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else if (txb2 == 3)
+			   {
+				   if (x.p3.size() <= 4) {
+					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
+					   temp = x.p2.top();
+					   x.p3.push(temp);
+					   x.p2.pop();
+					   listBox2->Items->Add(gcnew String(x.p3.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else
+			   {
+				   MessageBox::Show("Ingrese un numero del 0 al 3");
+			   }
+
+		   }
+		   else if (txb1 == 3)
+		   {
+			   if (txb2 == 0)
+			   {
+				   if (x.p0.size() <= 4) {
+					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
+					   temp = x.p3.top();
+					   x.p0.push(temp);
+					   x.p3.pop();
+					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else if (txb2 == 1)
+			   {
+				   if (x.p1.size() <= 4)
+				   {
+					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
+					   temp = x.p3.top();
+					   x.p1.push(temp);
+					   x.p3.pop();
+					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else if (txb2 == 2)
+			   {
+				   if (x.p2.size() <= 4) {
+					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
+					   temp = x.p3.top();
+					   x.p2.push(temp);
+					   x.p3.pop();
+					   listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
+				   }
+				   else
+				   {
+					   MessageBox::Show("Ingrese un numero del 0 al 3");
+				   }
+			   }
+			   else
+			   {
+
+				   MessageBox::Show("Ingrese un numero del 0 al 3");
+			   }
+
+		   }
+
+	   }
 	   // para realizar los movimientos
 	   
 private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 

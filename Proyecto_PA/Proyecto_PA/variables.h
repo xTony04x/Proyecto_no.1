@@ -1,36 +1,35 @@
 #pragma once
+#pragma once
 #include <string>
 #include <fstream>
 #include <sstream>
-#include"colores.h"
-#include<stack>
+#include "colores.h"
+#include <stack>
 using namespace std;
 using namespace System;
 
 class variables
 {
 
-	struct nodo
-	{
-		colores dato;
-		nodo* next;
-	};
-    
+    struct nodo
+    {
+        colores dato;
+        nodo* next;
+    };
+
 
 private:
-	nodo* Inicio = nullptr;
-
+    nodo* Inicio = nullptr;
 public:
     stack<string> p0;
     stack<string> p1;
     stack<string> p2;
     stack<string> p3;
-    void valores() {
 
-    }
+
+
     void agregarpila(nodo* lineas)
     {
-        nodo* ValNuevo = new nodo();
         p0.push(lineas->dato.pila0);
         p1.push(lineas->dato.pila1);
         p2.push(lineas->dato.pila2);
@@ -42,19 +41,25 @@ public:
         colores dato;
         fstream archivo;
         int totalLines = 0;
-        archivo.open(nombre, std::ios_base::in);
+
+        archivo.open(nombre,ios_base::in);
+
         string linea;
+
         char delimitador = ',';
+
         static nodo colores[100];
+
         while (archivo.good())
         {
             getline(archivo, linea);
-
-            std::stringstream X(linea);
+            
+            stringstream X(linea);
+            
             nodo* lineas = new nodo;
             int countT = 0;
-            std::string lineaT = "";
-            std::string Espacios = "";
+            string lineaT = "";
+            string Espacios = "";
 
             while (getline(X, lineaT, delimitador)) {
                 if (countT == 0) {
@@ -118,20 +123,6 @@ public:
         }
         return conteo;
     }
-    std::string printcolors()
-    {
-        std::string Mostrar = "";
-        nodo* color = new nodo();
-        color = Inicio;
-        while (color)
-        {
-            Mostrar += color->dato.pila0 + ", " + color->dato.pila1 + ", " + color->dato.pila2 + "\r\n";
-            color = color->next;
-        }
-        return Mostrar;
 
-
-    }
 };
-
 
