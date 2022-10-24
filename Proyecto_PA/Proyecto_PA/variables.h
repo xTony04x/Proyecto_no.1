@@ -3,6 +3,7 @@
 #include <fstream>
 #include <sstream>
 #include"colores.h"
+#include<stack>
 using namespace std;
 using namespace System;
 
@@ -14,40 +15,30 @@ class variables
 		colores dato;
 		nodo* next;
 	};
-
+    
 
 private:
 	nodo* Inicio = nullptr;
 
 public:
-	
+    stack<string> p0;
+    stack<string> p1;
+    stack<string> p2;
+    stack<string> p3;
+    void valores() {
+
+    }
     void agregarpila(nodo* lineas)
     {
         nodo* ValNuevo = new nodo();
-        ValNuevo->dato.pila0 = lineas->dato.pila0;
-        ValNuevo->dato.pila1 = lineas->dato.pila1;
-        ValNuevo->dato.pila2 = lineas->dato.pila2;
+        p0.push(lineas->dato.pila0);
+        p1.push(lineas->dato.pila1);
+        p2.push(lineas->dato.pila2);
+        p3.push(lineas->dato.pila3);
 
-        if (lineas->dato.pila0 != "" && lineas->dato.pila0 != " ")
-        {
-            if (Inicio == nullptr)
-            {
-                ValNuevo->next = nullptr;
-                Inicio = ValNuevo;
-            }
-            else
-            {
-                nodo* Moment = Inicio;
-                while (Moment->next)
-                {
-                    Moment = Moment->next;
-                }
-                Moment->next = ValNuevo;
-            }
-        }
     }
 
-    nodo* LeerArchivo(std::string nombre) {
+    nodo* LeerArchivo(string nombre) {
         colores dato;
         fstream archivo;
         int totalLines = 0;
@@ -80,14 +71,17 @@ public:
                         }
                         else
                         {
-                            Espacios += lineaT[i];
+                            Espacios = lineaT[i];
                         }
                     }
                     lineas->dato.pila1 = Espacios;
                 }
                 if (countT == 2) {
 
-                    lineas->dato.pila2 = std::stoi(lineaT);
+                    lineas->dato.pila2 = lineaT;
+                }
+                if (countT == 3) {
+                    lineas->dato.pila3 = lineaT;
                 }
                 countT = countT + 1;
             }

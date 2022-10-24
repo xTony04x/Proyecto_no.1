@@ -123,6 +123,7 @@
     <ClCompile Include="colores.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="MyForm1.cpp" />
+    <ClCompile Include="prueba.cpp" />
     <ClCompile Include="variables.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +134,7 @@
     <ClInclude Include="MyForm1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="prueba.h" />
     <ClInclude Include="variables.h" />
   </ItemGroup>
   <ItemGroup>

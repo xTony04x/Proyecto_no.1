@@ -8,6 +8,7 @@ public:
 	string pila0;
 	string pila1;
 	string pila2;
+	string pila3;
 
 	
 };

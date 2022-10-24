@@ -10,6 +10,9 @@
 
 
 
+
+
+
 namespace ProyectoPA {
 
 	using namespace System;
@@ -37,7 +40,8 @@ namespace ProyectoPA {
 	private: System::Windows::Forms::ListBox^ listBox4;
 
 	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::ListBox^ listBox5;
+
 
 	private: System::Windows::Forms::Button^ button3;
 	public:
@@ -110,7 +114,7 @@ namespace ProyectoPA {
 			this->listBox3 = (gcnew System::Windows::Forms::ListBox());
 			this->listBox4 = (gcnew System::Windows::Forms::ListBox());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
 			this->SuspendLayout();
 			// 
 			// button2
@@ -268,20 +272,20 @@ namespace ProyectoPA {
 			this->label8->TabIndex = 23;
 			this->label8->Text = L"mapa ingresado";
 			// 
-			// textBox3
+			// listBox5
 			// 
-			this->textBox3->Location = System::Drawing::Point(436, 363);
-			this->textBox3->Multiline = true;
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(81, 159);
-			this->textBox3->TabIndex = 24;
+			this->listBox5->FormattingEnabled = true;
+			this->listBox5->Location = System::Drawing::Point(423, 346);
+			this->listBox5->Name = L"listBox5";
+			this->listBox5->Size = System::Drawing::Size(111, 160);
+			this->listBox5->TabIndex = 24;
 			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(653, 534);
-			this->Controls->Add(this->textBox3);
+			this->Controls->Add(this->listBox5);
 			this->Controls->Add(this->label8);
 			this->Controls->Add(this->listBox4);
 			this->Controls->Add(this->listBox3);
@@ -308,14 +312,37 @@ namespace ProyectoPA {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
 	{//abrir el archivo
-		//Lectura del Archivo
 		variables x;
-		x.LeerArchivo("mapa.txt");
-		std::string Mostrar = "";
+		colores c;
+		string nombre = "mapa.csv";
+		x.LeerArchivo(nombre);
+		string Mostrar = "";
 		Mostrar = x.printcolors();
-
-		textBox1->Text = gcnew String(Mostrar.c_str());
-
+		listBox5->Items->Add(gcnew String(Mostrar.c_str()));
+		
+		
+			while (!x.p0.empty())
+			{
+				listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
+				x.p0.pop();
+			}
+			while (!x.p1.empty())
+			{
+				listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
+				x.p1.pop();
+			}
+			while (!x.p2.empty())
+			{
+				listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
+				x.p2.pop();
+			}
+			while (!x.p3.empty())
+			{
+				listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
+				x.p3.pop();
+			}
+		
+		
 	}
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	
