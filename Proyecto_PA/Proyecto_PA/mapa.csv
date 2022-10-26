@@ -1,3 +1,4 @@
-A,M,V,A
-A,M,R,V
-V,R,A,M
+A,M,V,R
+A,M,R,A
+V,R,M,V
+V, , , 

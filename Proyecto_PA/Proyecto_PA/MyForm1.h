@@ -4,8 +4,7 @@
 #include<stack>
 #include<string>
 #include <msclr\marshal_cppstd.h>
-#include"colores.h"
-#include"variables.h"
+
 
 
 
@@ -31,16 +30,32 @@ namespace ProyectoPA {
 
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
-	public: int txb1 = 0, txb2 = 0;
-	public: int contador = 0;
-	private: System::Windows::Forms::ListBox^ listBox1;
-	public:
-	private: System::Windows::Forms::ListBox^ listBox2;
-	private: System::Windows::Forms::ListBox^ listBox3;
-	private: System::Windows::Forms::ListBox^ listBox4;
+	public: int txb1 = 0,txb2 = 0, txb3 = 0;
 
-	private: System::Windows::Forms::Label^ label8;
-	private: System::Windows::Forms::ListBox^ listBox5;
+	public:
+
+
+
+
+
+
+
+
+
+
+
+
+	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::Label^ label15;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
+
+
+
+
 
 
 	private: System::Windows::Forms::Button^ button3;
@@ -76,10 +91,10 @@ namespace ProyectoPA {
 	private: System::Windows::Forms::Button^ button1;
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label5;
-	private: System::Windows::Forms::Label^ label6;
-	private: System::Windows::Forms::Label^ label7;
+
+
+
+
 
 
 
@@ -104,22 +119,20 @@ namespace ProyectoPA {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
-			this->label6 = (gcnew System::Windows::Forms::Label());
-			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
-			this->listBox2 = (gcnew System::Windows::Forms::ListBox());
-			this->listBox3 = (gcnew System::Windows::Forms::ListBox());
-			this->listBox4 = (gcnew System::Windows::Forms::ListBox());
-			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->listBox5 = (gcnew System::Windows::Forms::ListBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label15 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(112, 450);
+			this->button2->Location = System::Drawing::Point(158, 450);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(79, 30);
 			this->button2->TabIndex = 11;
@@ -130,7 +143,7 @@ namespace ProyectoPA {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(9, 420);
+			this->label2->Location = System::Drawing::Point(9, 386);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(52, 13);
 			this->label2->TabIndex = 10;
@@ -139,14 +152,14 @@ namespace ProyectoPA {
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(12, 475);
+			this->textBox2->Location = System::Drawing::Point(12, 441);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->Size = System::Drawing::Size(70, 20);
 			this->textBox2->TabIndex = 9;
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(12, 436);
+			this->textBox1->Location = System::Drawing::Point(12, 402);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(70, 20);
 			this->textBox1->TabIndex = 8;
@@ -174,7 +187,7 @@ namespace ProyectoPA {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 459);
+			this->label3->Location = System::Drawing::Point(12, 425);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(13, 13);
 			this->label3->TabIndex = 12;
@@ -185,45 +198,9 @@ namespace ProyectoPA {
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MyForm1::openFileDialog1_FileOk);
 			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(170, 82);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(20, 13);
-			this->label4->TabIndex = 13;
-			this->label4->Text = L"P0";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(270, 82);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(20, 13);
-			this->label5->TabIndex = 14;
-			this->label5->Text = L"P1";
-			// 
-			// label6
-			// 
-			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(367, 82);
-			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(20, 13);
-			this->label6->TabIndex = 15;
-			this->label6->Text = L"P2";
-			// 
-			// label7
-			// 
-			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(456, 82);
-			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(20, 13);
-			this->label7->TabIndex = 16;
-			this->label7->Text = L"P3";
-			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(308, 411);
+			this->button3->Location = System::Drawing::Point(455, 369);
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(79, 30);
 			this->button3->TabIndex = 17;
@@ -231,71 +208,69 @@ namespace ProyectoPA {
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MyForm1::button3_Click);
 			// 
-			// listBox1
+			// textBox3
 			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(146, 114);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(72, 82);
-			this->listBox1->TabIndex = 18;
+			this->textBox3->Location = System::Drawing::Point(12, 486);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(70, 20);
+			this->textBox3->TabIndex = 31;
 			// 
-			// listBox2
+			// label15
 			// 
-			this->listBox2->FormattingEnabled = true;
-			this->listBox2->Location = System::Drawing::Point(251, 114);
-			this->listBox2->Name = L"listBox2";
-			this->listBox2->Size = System::Drawing::Size(72, 82);
-			this->listBox2->TabIndex = 19;
+			this->label15->AutoSize = true;
+			this->label15->Location = System::Drawing::Point(12, 470);
+			this->label15->Name = L"label15";
+			this->label15->Size = System::Drawing::Size(58, 13);
+			this->label15->TabIndex = 32;
+			this->label15->Text = L"pos de pila";
 			// 
-			// listBox3
+			// dataGridView1
 			// 
-			this->listBox3->FormattingEnabled = true;
-			this->listBox3->Location = System::Drawing::Point(343, 114);
-			this->listBox3->Name = L"listBox3";
-			this->listBox3->Size = System::Drawing::Size(72, 82);
-			this->listBox3->TabIndex = 20;
+			this->dataGridView1->AllowDrop = true;
+			this->dataGridView1->AllowUserToAddRows = false;
+			this->dataGridView1->AllowUserToDeleteRows = false;
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
+				this->Column1,
+					this->Column2, this->Column3, this->Column4
+			});
+			this->dataGridView1->Location = System::Drawing::Point(93, 69);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(441, 214);
+			this->dataGridView1->TabIndex = 33;
+			this->dataGridView1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm1::dataGridView1_DragDrop);
+		
 			// 
-			// listBox4
+			// Column1
 			// 
-			this->listBox4->FormattingEnabled = true;
-			this->listBox4->Location = System::Drawing::Point(437, 114);
-			this->listBox4->Name = L"listBox4";
-			this->listBox4->Size = System::Drawing::Size(72, 82);
-			this->listBox4->TabIndex = 21;
+			this->Column1->HeaderText = L"p1";
+			this->Column1->Name = L"Column1";
 			// 
-			// label8
+			// Column2
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(435, 327);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(82, 13);
-			this->label8->TabIndex = 23;
-			this->label8->Text = L"mapa ingresado";
+			this->Column2->HeaderText = L"p2";
+			this->Column2->Name = L"Column2";
 			// 
-			// listBox5
+			// Column3
 			// 
-			this->listBox5->FormattingEnabled = true;
-			this->listBox5->Location = System::Drawing::Point(423, 346);
-			this->listBox5->Name = L"listBox5";
-			this->listBox5->Size = System::Drawing::Size(111, 160);
-			this->listBox5->TabIndex = 24;
+			this->Column3->HeaderText = L"p3";
+			this->Column3->Name = L"Column3";
+			// 
+			// Column4
+			// 
+			this->Column4->HeaderText = L"p4";
+			this->Column4->Name = L"Column4";
 			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::SystemColors::ControlDark;
 			this->ClientSize = System::Drawing::Size(653, 534);
-			this->Controls->Add(this->listBox5);
-			this->Controls->Add(this->label8);
-			this->Controls->Add(this->listBox4);
-			this->Controls->Add(this->listBox3);
-			this->Controls->Add(this->listBox2);
-			this->Controls->Add(this->listBox1);
+			this->Controls->Add(this->dataGridView1);
+			this->Controls->Add(this->label15);
+			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->button3);
-			this->Controls->Add(this->label7);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->label2);
@@ -305,6 +280,7 @@ namespace ProyectoPA {
 			this->Controls->Add(this->button1);
 			this->Name = L"MyForm1";
 			this->Text = L"MyForm1";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -312,33 +288,8 @@ namespace ProyectoPA {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
 	{//abrir el archivo
-		variables x;
-		colores c;
-		string nombre = "mapa.csv";
-		x.LeerArchivo(nombre);
-		string Mostrar = "";
-		listBox5->Items->Add(gcnew String(Mostrar.c_str()));
+		openFileDialog1->ShowDialog();
 		
-		while (!x.p0.empty())
-		{
-			listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
-			x.p0.pop();
-		}
-		while (!x.p1.empty())
-		{
-			listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
-			x.p1.pop();
-		}
-		while (!x.p2.empty())
-		{
-			listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
-			x.p2.pop();
-		}
-		while (!x.p3.empty())
-		{
-			listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
-			x.p3.pop();
-		}
 	}
 		   
 		
@@ -349,235 +300,50 @@ private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e)
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
 
 }
-private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	//SWAP
-	
-	txb1 = Convert::ToInt32(textBox1->Text);
-	txb2 = Convert::ToInt32(textBox2->Text);
-	void cambios();
-}
-	   public: void cambios() {
-		   variables x;
-		   string temp;
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		//SWAP
+		
+		
+	}
 		   
-		   if (txb1 == 0)
-		   {
+		   
+	   
+		   
 
-			   if (txb2 == 1)
-			   {
-				   if (x.p1.size() < 4)
-				   {
-					
-					   temp = x.p0.top();
-					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
-					   x.p1.push(temp);
-					   x.p0.pop();
-					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-
-			   else if (txb2 == 2)
-			   {
-				   if (x.p2.size() <= 4)
-				   {
-					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
-					   temp = x.p0.top();
-					   x.p2.push(temp);
-					   x.p0.pop();
-					   listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
-				   }
-				   else {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-
-			   else if (txb2 == 3)
-			   {
-				   if (x.p3.size() <= 4)
-				   {
-					   listBox1->Items->Remove(gcnew String(x.p0.top().c_str()));
-					   temp = x.p0.top();
-					   x.p3.push(temp);
-					   x.p0.pop();
-					   listBox4->Items->Add(gcnew String(x.p3.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   else if (txb1 == 1)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() <= 4) {
-					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
-					   temp = x.p1.top();
-					   x.p0.push(temp);
-					   x.p1.pop();
-					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-			   else if (txb2 == 2)
-			   {
-				   if (x.p2.size() <= 4) {
-					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
-					   temp = x.p1.top();
-					   x.p2.push(temp);
-					   x.p1.pop();
-					   listBox1->Items->Add(gcnew String(x.p2.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-			   else if (txb2 == 3)
-			   {
-				   if (x.p3.size() <= 4)
-				   {
-					   listBox2->Items->Remove(gcnew String(x.p1.top().c_str()));
-					   temp = x.p1.top();
-					   x.p3.push(temp);
-					   x.p1.pop();
-					   listBox1->Items->Add(gcnew String(x.p3.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("SOLO SE PUEDEN GUARDAR 4 ELEMENTOS POR PILA");
-				   }
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   else if (txb1 == 2)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() <= 4) {
-					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
-					   temp = x.p2.top();
-					   x.p0.push(temp);
-					   x.p2.pop();
-					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 1)
-			   {
-				   if (x.p1.size() <= 4) {
-					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
-					   temp = x.p2.top();
-					   x.p1.push(temp);
-					   x.p2.pop();
-					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 3)
-			   {
-				   if (x.p3.size() <= 4) {
-					   listBox3->Items->Remove(gcnew String(x.p2.top().c_str()));
-					   temp = x.p2.top();
-					   x.p3.push(temp);
-					   x.p2.pop();
-					   listBox2->Items->Add(gcnew String(x.p3.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else
-			   {
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-		   else if (txb1 == 3)
-		   {
-			   if (txb2 == 0)
-			   {
-				   if (x.p0.size() <= 4) {
-					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
-					   temp = x.p3.top();
-					   x.p0.push(temp);
-					   x.p3.pop();
-					   listBox1->Items->Add(gcnew String(x.p0.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 1)
-			   {
-				   if (x.p1.size() <= 4)
-				   {
-					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
-					   temp = x.p3.top();
-					   x.p1.push(temp);
-					   x.p3.pop();
-					   listBox2->Items->Add(gcnew String(x.p1.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else if (txb2 == 2)
-			   {
-				   if (x.p2.size() <= 4) {
-					   listBox4->Items->Remove(gcnew String(x.p3.top().c_str()));
-					   temp = x.p3.top();
-					   x.p2.push(temp);
-					   x.p3.pop();
-					   listBox3->Items->Add(gcnew String(x.p2.top().c_str()));
-				   }
-				   else
-				   {
-					   MessageBox::Show("Ingrese un numero del 0 al 3");
-				   }
-			   }
-			   else
-			   {
-
-				   MessageBox::Show("Ingrese un numero del 0 al 3");
-			   }
-
-		   }
-
-	   }
+	   
 	   // para realizar los movimientos
 	   
-private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) 
-{
+	private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
+	{
+		String^ FilePath = openFileDialog1->FileName;
+		StreamReader^ sr = gcnew StreamReader(FilePath); 
 
-}
+			String^ pilas = "";
+
+			String^ Linea = "";
+
+			int Contador = 0;
+
+			while ((Linea = sr->ReadLine()) != nullptr) {
+				
+				array<String^>^ datapilas = Linea->Split(',');
+
+				dataGridView1->Rows->Add(1);
+				dataGridView1->Rows[Contador]->Cells[0]->Value = datapilas[0];
+				dataGridView1->Rows[Contador]->Cells[1]->Value = datapilas[1];
+				dataGridView1->Rows[Contador]->Cells[2]->Value = datapilas[2];
+				dataGridView1->Rows[Contador]->Cells[3]->Value = datapilas[3];
+
+				Contador++;				
+			}
+
+			sr->Close();
+		
+	}
+
+
+ 
+
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
 	
 	
@@ -591,5 +357,9 @@ private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e
 private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
 
 }
+private: System::Void dataGridView1_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e) {
+	
+}
+
 };
 }
