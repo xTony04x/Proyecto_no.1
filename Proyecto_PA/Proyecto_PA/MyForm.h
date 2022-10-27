@@ -103,6 +103,7 @@ namespace ProyectoPA {
 			this->button2->TabIndex = 2;
 			this->button2->Text = L"DIF -NORMAL";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
 			// button3
 			// 
@@ -145,6 +146,8 @@ namespace ProyectoPA {
 		//hecho por Boris Garzona y Anthony Belteton
 
 #pragma endregion
+		private:
+			bool bandera = false;
 	private: System::Void MyForm_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
@@ -157,5 +160,11 @@ namespace ProyectoPA {
 		MyForm2^ xx = gcnew MyForm2();
 		xx->ShowDialog();
 	}
-	};
+	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
+		MyForm2^ xx = gcnew MyForm2();
+		xx->ShowDialog();
+		bandera = true;
+		
+	}
+};
 }

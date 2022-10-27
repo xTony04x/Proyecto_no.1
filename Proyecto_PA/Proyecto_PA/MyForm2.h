@@ -1,5 +1,9 @@
 #pragma once
-
+#include <Windows.h>
+#include <string.h>
+#include <msclr\marshal_cppstd.h>
+#include "variables.h"
+#include <iostream>
 namespace ProyectoPA {
 
 	using namespace System;
@@ -8,12 +12,16 @@ namespace ProyectoPA {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace std;
 
 	/// <summary>
 	/// Resumen de MyForm2
 	/// </summary>
 	public ref class MyForm2 : public System::Windows::Forms::Form
 	{
+		static int segundos =60, minutos=9;
+		static String^ secs;
+		static String^ mins;
 	public:
 		MyForm2(void)
 		{
@@ -44,6 +52,7 @@ namespace ProyectoPA {
 	private: System::Windows::Forms::Button^ SbS_btn;
 	private: System::Windows::Forms::Button^ Upload_btn;
 	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::Label^ label2;
 	private: System::ComponentModel::IContainer^ components;
 
 	private:
@@ -69,6 +78,7 @@ namespace ProyectoPA {
 			this->SbS_btn = (gcnew System::Windows::Forms::Button());
 			this->Upload_btn = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Tablero_principal))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -129,6 +139,7 @@ namespace ProyectoPA {
 			this->FastS_btn->TabIndex = 20;
 			this->FastS_btn->Text = L"Imprimir reporte";
 			this->FastS_btn->UseVisualStyleBackColor = false;
+			this->FastS_btn->Click += gcnew System::EventHandler(this, &MyForm2::FastS_btn_Click);
 			// 
 			// Borrar_btn
 			// 
@@ -142,6 +153,7 @@ namespace ProyectoPA {
 			this->Borrar_btn->TabIndex = 19;
 			this->Borrar_btn->Text = L"Borrar Mapa";
 			this->Borrar_btn->UseVisualStyleBackColor = false;
+			this->Borrar_btn->Click += gcnew System::EventHandler(this, &MyForm2::Borrar_btn_Click);
 			// 
 			// SbS_btn
 			// 
@@ -155,6 +167,7 @@ namespace ProyectoPA {
 			this->SbS_btn->TabIndex = 18;
 			this->SbS_btn->Text = L"Solución paso a paso";
 			this->SbS_btn->UseVisualStyleBackColor = false;
+			this->SbS_btn->Click += gcnew System::EventHandler(this, &MyForm2::SbS_btn_Click);
 			// 
 			// Upload_btn
 			// 
@@ -168,6 +181,7 @@ namespace ProyectoPA {
 			this->Upload_btn->TabIndex = 17;
 			this->Upload_btn->Text = L"Cargar y mostrar archivo";
 			this->Upload_btn->UseVisualStyleBackColor = false;
+			this->Upload_btn->Click += gcnew System::EventHandler(this, &MyForm2::Upload_btn_Click);
 			// 
 			// timer1
 			// 
@@ -175,12 +189,22 @@ namespace ProyectoPA {
 			this->timer1->Interval = 1000;
 			this->timer1->Tick += gcnew System::EventHandler(this, &MyForm2::timer1_Tick);
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(937, 51);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(35, 13);
+			this->label2->TabIndex = 25;
+			this->label2->Text = L"label2";
+			// 
 			// MyForm2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ButtonShadow;
 			this->ClientSize = System::Drawing::Size(1073, 555);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->Tablero_principal);
 			this->Controls->Add(this->Max_lmnt);
 			this->Controls->Add(this->label1);
@@ -197,7 +221,77 @@ namespace ProyectoPA {
 
 		}
 #pragma endregion
+
+		private:
+			bool bandera = false;
+
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		
+			segundos--;
+			if (segundos == 0) {
+				minutos--;
+			}
+			secs = Convert::ToString(segundos);
+			mins = Convert::ToString(minutos);
+			label2->Text = mins + ":" + secs;
+		
+		
 	}
+		   static String^ path;
+private: System::Void Upload_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	int size_pilas;
+	try {
+		int::TryParse(Max_lmnt->Text, size_pilas);
+		// string que guarda la dirección
+		String^ direc;
+		// string de lectura
+		string info2;
+		// selector de archivo 
+		Stream^ myst;
+		// upload directory = updirec
+		OpenFileDialog^ updirec = gcnew OpenFileDialog;
+
+		try {
+			//caracteristicas y filtros
+			updirec->InitialDirectory = "c:\\documents";
+			updirec->Filter = "Text file(*.txt)| *.txt";
+			updirec->RestoreDirectory = false;
+
+			if (updirec->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				if ((myst = updirec->OpenFile()) != nullptr)
+				{
+					direc = (updirec->FileName);
+					path = direc;
+					StreamReader^ lect = gcnew StreamReader(direc);
+					String^ info = lect->ReadToEnd();
+					info2 = msclr::interop::marshal_as<std::string>(info);
+				}
+			}
+		}
+		catch (Exception^ e) {
+			MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		Separador(info2, size_pilas, Tablero_principal);
+
+	}
+	catch (Exception^ e) {
+
+		MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+	}
+}
+private: System::Void Borrar_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	Borrar(Tablero_principal);
+}
+private: System::Void SbS_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	Ordenar_SBS_Pila(Tablero_principal);
+}
+private: System::Void FastS_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	string instrucciones = Impresion();
+	StreamWriter^ impresora = gcnew StreamWriter("colormania_resuelto.txt");
+	String^ pasos = gcnew String(Impresion().c_str());
+	impresora->Write(pasos);
+	impresora->Close();
+}
 };
 }
