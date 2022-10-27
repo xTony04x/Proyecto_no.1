@@ -4,6 +4,8 @@
 #include<stack>
 #include<string>
 #include <msclr\marshal_cppstd.h>
+#include"MyForm1.cpp"
+
 
 
 
@@ -31,6 +33,15 @@ namespace ProyectoPA {
 	public ref class MyForm1 : public System::Windows::Forms::Form
 	{
 	public: int txb1 = 0,txb2 = 0, txb3 = 0;
+	private: System::Windows::Forms::PictureBox^ Tablero_principal;
+	public:
+	private: System::Windows::Forms::TextBox^ Max_lmnt;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ Exit_btn;
+	private: System::Windows::Forms::Button^ FastS_btn;
+	private: System::Windows::Forms::Button^ Borrar_btn;
+	private: System::Windows::Forms::Button^ SbS_btn;
+	private: System::Windows::Forms::Button^ Upload_btn;
 
 	public:
 
@@ -45,20 +56,20 @@ namespace ProyectoPA {
 
 
 
-	private: System::Windows::Forms::TextBox^ textBox3;
-	private: System::Windows::Forms::Label^ label15;
-	private: System::Windows::Forms::DataGridView^ dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column3;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^ Column4;
 
 
 
 
 
 
-	private: System::Windows::Forms::Button^ button3;
+
+
+
+
+
+
+
+
 	public:
 	public:
 		
@@ -82,14 +93,14 @@ namespace ProyectoPA {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^ button2;
+
 	protected:
-	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ textBox2;
-	private: System::Windows::Forms::TextBox^ textBox1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Label^ label3;
+
+
+
+
+
+
 	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
 
 
@@ -111,176 +122,137 @@ namespace ProyectoPA {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->label15 = (gcnew System::Windows::Forms::Label());
-			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
-			this->Column1 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column2 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column3 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Column4 = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->Tablero_principal = (gcnew System::Windows::Forms::PictureBox());
+			this->Max_lmnt = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->Exit_btn = (gcnew System::Windows::Forms::Button());
+			this->FastS_btn = (gcnew System::Windows::Forms::Button());
+			this->Borrar_btn = (gcnew System::Windows::Forms::Button());
+			this->SbS_btn = (gcnew System::Windows::Forms::Button());
+			this->Upload_btn = (gcnew System::Windows::Forms::Button());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Tablero_principal))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(158, 450);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(79, 30);
-			this->button2->TabIndex = 11;
-			this->button2->Text = L"Swap";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &MyForm1::button2_Click);
-			// 
-			// label2
-			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(9, 386);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(52, 13);
-			this->label2->TabIndex = 10;
-			this->label2->Text = L"Mover de";
-			this->label2->Click += gcnew System::EventHandler(this, &MyForm1::label2_Click);
-			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(12, 441);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(70, 20);
-			this->textBox2->TabIndex = 9;
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(12, 402);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(70, 20);
-			this->textBox1->TabIndex = 8;
-			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(9, 10);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(77, 13);
-			this->label1->TabIndex = 7;
-			this->label1->Text = L"Ingresar mapa:";
-			this->label1->Click += gcnew System::EventHandler(this, &MyForm1::label1_Click);
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(92, 1);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(99, 29);
-			this->button1->TabIndex = 6;
-			this->button1->Text = L"Agregar mapa";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm1::button1_Click);
-			// 
-			// label3
-			// 
-			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(12, 425);
-			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(13, 13);
-			this->label3->TabIndex = 12;
-			this->label3->Text = L"a";
 			// 
 			// openFileDialog1
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MyForm1::openFileDialog1_FileOk);
 			// 
-			// button3
+			// Tablero_principal
 			// 
-			this->button3->Location = System::Drawing::Point(455, 369);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(79, 30);
-			this->button3->TabIndex = 17;
-			this->button3->Text = L"Escribir mapa";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &MyForm1::button3_Click);
+			this->Tablero_principal->BackColor = System::Drawing::Color::Transparent;
+			this->Tablero_principal->Location = System::Drawing::Point(25, 87);
+			this->Tablero_principal->Name = L"Tablero_principal";
+			this->Tablero_principal->Size = System::Drawing::Size(835, 372);
+			this->Tablero_principal->TabIndex = 16;
+			this->Tablero_principal->TabStop = false;
 			// 
-			// textBox3
+			// Max_lmnt
 			// 
-			this->textBox3->Location = System::Drawing::Point(12, 486);
-			this->textBox3->Name = L"textBox3";
-			this->textBox3->Size = System::Drawing::Size(70, 20);
-			this->textBox3->TabIndex = 31;
+			this->Max_lmnt->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Max_lmnt->Location = System::Drawing::Point(25, 43);
+			this->Max_lmnt->Name = L"Max_lmnt";
+			this->Max_lmnt->Size = System::Drawing::Size(100, 26);
+			this->Max_lmnt->TabIndex = 15;
+			this->Max_lmnt->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			// 
-			// label15
+			// label1
 			// 
-			this->label15->AutoSize = true;
-			this->label15->Location = System::Drawing::Point(12, 470);
-			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(58, 13);
-			this->label15->TabIndex = 32;
-			this->label15->Text = L"pos de pila";
+			this->label1->AutoSize = true;
+			this->label1->BackColor = System::Drawing::Color::Transparent;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(21, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(146, 19);
+			this->label1->TabIndex = 14;
+			this->label1->Text = L"Elementos por fila:";
 			// 
-			// dataGridView1
+			// Exit_btn
 			// 
-			this->dataGridView1->AllowDrop = true;
-			this->dataGridView1->AllowUserToAddRows = false;
-			this->dataGridView1->AllowUserToDeleteRows = false;
-			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {
-				this->Column1,
-					this->Column2, this->Column3, this->Column4
-			});
-			this->dataGridView1->Location = System::Drawing::Point(93, 69);
-			this->dataGridView1->Name = L"dataGridView1";
-			this->dataGridView1->Size = System::Drawing::Size(441, 214);
-			this->dataGridView1->TabIndex = 33;
-			this->dataGridView1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm1::dataGridView1_DragDrop);
-			this->dataGridView1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm1::dataGridView1_MouseDown);
+			this->Exit_btn->BackColor = System::Drawing::Color::White;
+			this->Exit_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Exit_btn->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Exit_btn->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->Exit_btn->Location = System::Drawing::Point(970, 156);
+			this->Exit_btn->Name = L"Exit_btn";
+			this->Exit_btn->Size = System::Drawing::Size(93, 50);
+			this->Exit_btn->TabIndex = 13;
+			this->Exit_btn->Text = L"Salir";
+			this->Exit_btn->UseVisualStyleBackColor = false;
 			// 
-			// Column1
+			// FastS_btn
 			// 
-			this->Column1->HeaderText = L"p1";
-			this->Column1->Name = L"Column1";
+			this->FastS_btn->BackColor = System::Drawing::Color::White;
+			this->FastS_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->FastS_btn->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->FastS_btn->Location = System::Drawing::Point(871, 226);
+			this->FastS_btn->Name = L"FastS_btn";
+			this->FastS_btn->Size = System::Drawing::Size(192, 50);
+			this->FastS_btn->TabIndex = 12;
+			this->FastS_btn->Text = L"Imprimir reporte";
+			this->FastS_btn->UseVisualStyleBackColor = false;
 			// 
-			// Column2
+			// Borrar_btn
 			// 
-			this->Column2->HeaderText = L"p2";
-			this->Column2->Name = L"Column2";
+			this->Borrar_btn->BackColor = System::Drawing::Color::White;
+			this->Borrar_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Borrar_btn->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Borrar_btn->Location = System::Drawing::Point(871, 156);
+			this->Borrar_btn->Name = L"Borrar_btn";
+			this->Borrar_btn->Size = System::Drawing::Size(93, 50);
+			this->Borrar_btn->TabIndex = 11;
+			this->Borrar_btn->Text = L"Borrar Mapa";
+			this->Borrar_btn->UseVisualStyleBackColor = false;
 			// 
-			// Column3
+			// SbS_btn
 			// 
-			this->Column3->HeaderText = L"p3";
-			this->Column3->Name = L"Column3";
+			this->SbS_btn->BackColor = System::Drawing::Color::White;
+			this->SbS_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->SbS_btn->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->SbS_btn->Location = System::Drawing::Point(871, 291);
+			this->SbS_btn->Name = L"SbS_btn";
+			this->SbS_btn->Size = System::Drawing::Size(192, 50);
+			this->SbS_btn->TabIndex = 10;
+			this->SbS_btn->Text = L"Solución paso a paso";
+			this->SbS_btn->UseVisualStyleBackColor = false;
 			// 
-			// Column4
+			// Upload_btn
 			// 
-			this->Column4->HeaderText = L"p4";
-			this->Column4->Name = L"Column4";
+			this->Upload_btn->BackColor = System::Drawing::Color::White;
+			this->Upload_btn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+			this->Upload_btn->Font = (gcnew System::Drawing::Font(L"Rockwell", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->Upload_btn->Location = System::Drawing::Point(871, 87);
+			this->Upload_btn->Name = L"Upload_btn";
+			this->Upload_btn->Size = System::Drawing::Size(186, 50);
+			this->Upload_btn->TabIndex = 9;
+			this->Upload_btn->Text = L"Cargar y mostrar archivo";
+			this->Upload_btn->UseVisualStyleBackColor = false;
 			// 
 			// MyForm1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ControlDark;
-			this->ClientSize = System::Drawing::Size(653, 534);
-			this->Controls->Add(this->dataGridView1);
-			this->Controls->Add(this->label15);
-			this->Controls->Add(this->textBox3);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->textBox1);
+			this->ClientSize = System::Drawing::Size(1069, 567);
+			this->Controls->Add(this->Tablero_principal);
+			this->Controls->Add(this->Max_lmnt);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->Exit_btn);
+			this->Controls->Add(this->FastS_btn);
+			this->Controls->Add(this->Borrar_btn);
+			this->Controls->Add(this->SbS_btn);
+			this->Controls->Add(this->Upload_btn);
 			this->Name = L"MyForm1";
 			this->Text = L"MyForm1";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Tablero_principal))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -312,38 +284,49 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 
 	   
 	   // para realizar los movimientos
-	   
+		   static String^ path;
 	private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
 	{
-		String^ FilePath = openFileDialog1->FileName;
-		StreamReader^ sr = gcnew StreamReader(FilePath); 
+		int size_pilas;
+		try {
+			int::TryParse(Max_lmnt->Text, size_pilas);
+			// string que guarda la dirección
+			String^ direc;
+			// string de lectura
+			string info2;
+			// selector de archivo 
+			Stream^ myst;
+			// upload directory = updirec
+			OpenFileDialog^ updirec = gcnew OpenFileDialog;
 
-			String^ pilas = "";
+			try {
+				//caracteristicas y filtros
+				updirec->InitialDirectory = "c:\\documents";
+				updirec->Filter = "Text file(*.txt)| *.txt";
+				updirec->RestoreDirectory = false;
 
-			String^ Linea = "";
-
-			int Contador = 0;
-
-			while ((Linea = sr->ReadLine()) != nullptr) {
-				
-				array<String^>^ datapilas = Linea->Split(',');
-
-				dataGridView1->Rows->Add(1);
-				dataGridView1->Rows[Contador]->Cells[0]->Value = datapilas[0];
-				dataGridView1->Rows[Contador]->Cells[1]->Value = datapilas[1];
-				dataGridView1->Rows[Contador]->Cells[2]->Value = datapilas[2];
-				dataGridView1->Rows[Contador]->Cells[3]->Value = datapilas[3];
-				
-				p1[Contador] = datapilas[0];
-				p2[Contador] = datapilas[1];
-				p3[Contador] = datapilas[2];
-				p4[Contador] = datapilas[3];
-
-				Contador++;				
+				if (updirec->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+				{
+					if ((myst = updirec->OpenFile()) != nullptr)
+					{
+						direc = (updirec->FileName);
+						path = direc;
+						StreamReader^ lect = gcnew StreamReader(direc);
+						String^ info = lect->ReadToEnd();
+						info2 = msclr::interop::marshal_as<std::string>(info);
+					}
+				}
 			}
+			catch (Exception^ e) {
+				MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+			spaces(info2, size_pilas, Tablero_principal);
 
-			sr->Close();
-		
+		}
+		catch (Exception^ e) {
+
+			MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+		}
 	}
 
 
