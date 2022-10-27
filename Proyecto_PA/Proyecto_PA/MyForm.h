@@ -1,5 +1,5 @@
 #pragma once
-#include"MyForm1.h"
+#include"MyForm2.h"
 namespace ProyectoPA {
 
 	using namespace System;
@@ -154,7 +154,7 @@ namespace ProyectoPA {
 
 	}
 	private: System::Void button1_Click_1(System::Object^ sender, System::EventArgs^ e) {
-		MyForm1^ xx = gcnew MyForm1();
+		MyForm2^ xx = gcnew MyForm2();
 		xx->ShowDialog();
 	}
 	};
