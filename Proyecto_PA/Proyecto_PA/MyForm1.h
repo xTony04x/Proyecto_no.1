@@ -239,7 +239,7 @@ namespace ProyectoPA {
 			this->dataGridView1->Size = System::Drawing::Size(441, 214);
 			this->dataGridView1->TabIndex = 33;
 			this->dataGridView1->DragDrop += gcnew System::Windows::Forms::DragEventHandler(this, &MyForm1::dataGridView1_DragDrop);
-		
+			this->dataGridView1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &MyForm1::dataGridView1_MouseDown);
 			// 
 			// Column1
 			// 
@@ -333,6 +333,11 @@ private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e)
 				dataGridView1->Rows[Contador]->Cells[1]->Value = datapilas[1];
 				dataGridView1->Rows[Contador]->Cells[2]->Value = datapilas[2];
 				dataGridView1->Rows[Contador]->Cells[3]->Value = datapilas[3];
+				
+				p1[Contador] = datapilas[0];
+				p2[Contador] = datapilas[1];
+				p3[Contador] = datapilas[2];
+				p4[Contador] = datapilas[3];
 
 				Contador++;				
 			}
@@ -361,5 +366,9 @@ private: System::Void dataGridView1_DragDrop(System::Object^ sender, System::Win
 	
 }
 
+private: System::Void dataGridView1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	
+
+}
 };
 }
