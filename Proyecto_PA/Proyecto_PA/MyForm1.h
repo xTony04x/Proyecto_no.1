@@ -5,6 +5,7 @@
 #include<string>
 #include <msclr\marshal_cppstd.h>
 #include"MyForm1.cpp"
+#include"variables.h"
 
 
 
@@ -23,6 +24,7 @@ namespace ProyectoPA {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace System::IO;
+	using namespace std;
 	
 
 	/// <summary>
@@ -101,7 +103,7 @@ namespace ProyectoPA {
 
 
 
-	private: System::Windows::Forms::OpenFileDialog^ openFileDialog1;
+
 
 
 
@@ -122,7 +124,6 @@ namespace ProyectoPA {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->Tablero_principal = (gcnew System::Windows::Forms::PictureBox());
 			this->Max_lmnt = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -133,11 +134,6 @@ namespace ProyectoPA {
 			this->Upload_btn = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Tablero_principal))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// openFileDialog1
-			// 
-			this->openFileDialog1->FileName = L"openFileDialog1";
-			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &MyForm1::openFileDialog1_FileOk);
 			// 
 			// Tablero_principal
 			// 
@@ -196,6 +192,7 @@ namespace ProyectoPA {
 			this->FastS_btn->TabIndex = 12;
 			this->FastS_btn->Text = L"Imprimir reporte";
 			this->FastS_btn->UseVisualStyleBackColor = false;
+			this->FastS_btn->Click += gcnew System::EventHandler(this, &MyForm1::FastS_btn_Click);
 			// 
 			// Borrar_btn
 			// 
@@ -209,6 +206,7 @@ namespace ProyectoPA {
 			this->Borrar_btn->TabIndex = 11;
 			this->Borrar_btn->Text = L"Borrar Mapa";
 			this->Borrar_btn->UseVisualStyleBackColor = false;
+			this->Borrar_btn->Click += gcnew System::EventHandler(this, &MyForm1::Borrar_btn_Click);
 			// 
 			// SbS_btn
 			// 
@@ -222,6 +220,7 @@ namespace ProyectoPA {
 			this->SbS_btn->TabIndex = 10;
 			this->SbS_btn->Text = L"Solución paso a paso";
 			this->SbS_btn->UseVisualStyleBackColor = false;
+			this->SbS_btn->Click += gcnew System::EventHandler(this, &MyForm1::SbS_btn_Click);
 			// 
 			// Upload_btn
 			// 
@@ -235,6 +234,7 @@ namespace ProyectoPA {
 			this->Upload_btn->TabIndex = 9;
 			this->Upload_btn->Text = L"Cargar y mostrar archivo";
 			this->Upload_btn->UseVisualStyleBackColor = false;
+			this->Upload_btn->Click += gcnew System::EventHandler(this, &MyForm1::Upload_btn_Click);
 			// 
 			// MyForm1
 			// 
@@ -258,100 +258,61 @@ namespace ProyectoPA {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
-	{//abrir el archivo
-		openFileDialog1->ShowDialog();
-		
-	}
-		   
-		
-		   
-private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-	}
-private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+		   static String^ path;	   
+private: System::Void Upload_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	int size_pilas;
+	try {
+		int::TryParse(Max_lmnt->Text, size_pilas);
+		// string que guarda la dirección
+		String^ direc;
+		// string de lectura
+		string info2;
+		// selector de archivo 
+		Stream^ myst;
+		// upload directory = updirec
+		OpenFileDialog^ updirec = gcnew OpenFileDialog;
 
-}
-	private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-		//SWAP
-		
-		
-	}
-		   
-		   
-	   
-		   
-
-	   
-	   // para realizar los movimientos
-		   static String^ path;
-	private: System::Void openFileDialog1_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e)
-	{
-		int size_pilas;
 		try {
-			int::TryParse(Max_lmnt->Text, size_pilas);
-			// string que guarda la dirección
-			String^ direc;
-			// string de lectura
-			string info2;
-			// selector de archivo 
-			Stream^ myst;
-			// upload directory = updirec
-			OpenFileDialog^ updirec = gcnew OpenFileDialog;
+			//caracteristicas y filtros
+			updirec->InitialDirectory = "c:\\documents";
+			updirec->Filter = "Text file(*.txt)| *.txt";
+			updirec->RestoreDirectory = false;
 
-			try {
-				//caracteristicas y filtros
-				updirec->InitialDirectory = "c:\\documents";
-				updirec->Filter = "Text file(*.txt)| *.txt";
-				updirec->RestoreDirectory = false;
-
-				if (updirec->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			if (updirec->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			{
+				if ((myst = updirec->OpenFile()) != nullptr)
 				{
-					if ((myst = updirec->OpenFile()) != nullptr)
-					{
-						direc = (updirec->FileName);
-						path = direc;
-						StreamReader^ lect = gcnew StreamReader(direc);
-						String^ info = lect->ReadToEnd();
-						info2 = msclr::interop::marshal_as<std::string>(info);
-					}
+					direc = (updirec->FileName);
+					path = direc;
+					StreamReader^ lect = gcnew StreamReader(direc);
+					String^ info = lect->ReadToEnd();
+					info2 = msclr::interop::marshal_as<std::string>(info);
 				}
 			}
-			catch (Exception^ e) {
-				MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			}
-			spaces(info2, size_pilas, Tablero_principal);
-
 		}
 		catch (Exception^ e) {
-
-			MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+			MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
+		Separador(info2, size_pilas, Tablero_principal);
+
 	}
+	catch (Exception^ e) {
 
-
- 
-
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-	
-	
-	
+		MessageBox::Show("Error detectado: " + e->Message, "Valores incorrectos", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+	}
 }
-private: System::Void button4_Click(System::Object^ sender, System::EventArgs^ e) {
-
+private: System::Void Borrar_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	Borrar(Tablero_principal);
 }
-	  
-private: System::Void listBox5_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-
+private: System::Void SbS_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	Ordenar_SBS_Pila(Tablero_principal);
 }
-private: System::Void dataGridView1_DragDrop(System::Object^ sender, System::Windows::Forms::DragEventArgs^ e) {
-	
-}
-
-private: System::Void dataGridView1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
-	
-
+private: System::Void FastS_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+	string instrucciones = Impresion();
+	StreamWriter^ impresora = gcnew StreamWriter("colormania_resuelto.txt");
+	String^ pasos = gcnew String(Impresion().c_str());
+	impresora->Write(pasos);
+	impresora->Close();
 }
 };
 }
